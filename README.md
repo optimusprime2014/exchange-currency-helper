@@ -1,2 +1,2 @@
-# exchange-currency-helper
+# ex-helper
 Exchange currency helper
