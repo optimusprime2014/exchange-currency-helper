@@ -98,10 +98,7 @@
                         item.rate = response.rate
                         item.value = constant.methods.round(item.quantity * item.rate, 2)
 
-                        this.total.value = constant.methods.round(
-                            Object.values(this.items).reduce((t, {value}) => t + value, 0.0),
-                            2
-                        )
+                        this.recalculateTotal()
                     })
                     .catch(error => console.log(error))
             },
@@ -114,9 +111,11 @@
                 if (this.items.length === 0) return
                 if (index === 0 && this.items.length === 1) {
                     this.items = []
+                    this.total.value = 0.0
                     return
                 }
                 this.items.splice(index, 1)
+                this.recalculateTotal()
             },
             getDefaultItem() {
                 return {
@@ -127,6 +126,12 @@
                     rate: 0.0,
                     value: 0.0,
                 }
+            },
+            recalculateTotal() {
+                this.total.value = constant.methods.round(
+                    Object.values(this.items).reduce((t, {value}) => t + value, 0.0),
+                    2
+                )
             }
         },
         mounted() {
