@@ -36,7 +36,8 @@
                     <input type="date" id="incomeDate" name="incomeDate" v-model="item.incomeDate">
                 </td>
                 <td>
-                    <select id="currencies" name="currencies" v-model="item.currency">
+                    <select id="currencies" name="currencies" v-model="item.currency"
+                            @change="convertCurrency(item)">
                         <option v-for="currency in currencies" :key="currency">
                             {{currency}}
                         </option>
